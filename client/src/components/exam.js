@@ -44,9 +44,11 @@ export default class Exam extends Component {
     starttimer = () => {
         
         
-            this.setTime(60000)
-            this.setCountDown(1)
+            this.setTime(this.state.time*60000)
+            this.setCountDown()
         document.querySelector('#start').hidden=true
+        document.querySelector('#from').hidden=false
+
     }
 
     // myVar = setInterval(myTimer, 1000);
@@ -55,7 +57,7 @@ export default class Exam extends Component {
     //     document.getElementById("demo").innerHTML = d.toLocaleTimeString();
     // }
 
-    setCountDown = async (min1) => {
+    setCountDown = async () => {
         let min = this.state.time;
         let sec = 60;
         console.log('cont down executed')
@@ -82,9 +84,10 @@ export default class Exam extends Component {
                 <div  id="exam">
                     <h1>This is first google embed</h1>
                     <div><button onClick={this.starttimer} id='start'>Start</button></div>
+                    <div color='red'>once you click start the timer will star. do not refresh . Do click the submit button before time end</div>
                     <div id='demo'></div>
                     <div><span id='min'></span> : <span id='sec'></span></div>
-                    <iframe title='googleform' src={this.state.url}
+                    <iframe hidden='true' id='form' title='googleform' src={this.state.url}
                         width="640" height="1517" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
                 </div>
                 
