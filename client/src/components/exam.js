@@ -56,7 +56,7 @@ export default class Exam extends Component {
     // }
 
     setCountDown = async (min1) => {
-        let min = min1;
+        let min = this.state.time;
         let sec = 60;
         console.log('cont down executed')
         var clear = setInterval(function () {
@@ -84,7 +84,7 @@ export default class Exam extends Component {
                     <div><button onClick={this.starttimer} id='start'>Start</button></div>
                     <div id='demo'></div>
                     <div><span id='min'></span> : <span id='sec'></span></div>
-                    <iframe title='googleform' src="https://docs.google.com/forms/d/e/1FAIpQLSevGCuo_JdIDoJg7XCVQL6IIUoGBoU35rr1R1zCUi698UMtEQ/viewform?embedded=true"
+                    <iframe title='googleform' src={this.state.url}
                         width="640" height="1517" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
                 </div>
                 
