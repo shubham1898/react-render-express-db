@@ -10,6 +10,10 @@ export default class Exam extends Component {
             time: 0,
             code: ''
         }
+         this.exam_over=<div></div>
+         this.form_dis=true
+         this.btn_dis=true
+         this.url1=''
     }
     componentDidMount(){
         
@@ -18,10 +22,11 @@ export default class Exam extends Component {
         const code = {
             code: this.state.code
         }
-        document.querySelector('#start').hidden=false
+        // document.querySelector('#start').disabled=false
+        this.btn_dis=false
         const res = await axios.post('/CreateForm/exam', code);
+        this.url1=res.data.url
         this.setState({
-            url: res.data.url,
             time: res.data.time
         })
     }
@@ -35,7 +40,20 @@ export default class Exam extends Component {
        setTime = async (time) => {
            console.log('times executed')
         setTimeout(() => {
-            window.location.reload()
+            // window.location.reload()
+            document.querySelector('#form').hidden=true
+            this.form_dis=true
+            this.exam_over=<h3 className='text-success text-center'>Exam Over</h3>
+
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+              }
+              this.setState({
+                  code:'',
+                  url:'',
+                  time:0
+              })
+
         }, time)
     }
 
@@ -43,12 +61,13 @@ export default class Exam extends Component {
     
 
     starttimer = () => {
+         
+            this.setTime(this.state.time*60000);
+            this.setCountDown();
+            document.querySelector('#form').hidden=false;
+            document.querySelector('#start').hidden=true;
         
-        
-            this.setTime(this.state.time*60000)
-            this.setCountDown()
-        document.querySelector('#start').hidden=true
-        document.querySelector('#form').hidden=false
+       
 
     }
 
@@ -59,6 +78,8 @@ export default class Exam extends Component {
     // }
 
     setCountDown = async () => {
+        this.form_dis=false
+        this.btn_dis=true
         let min = this.state.time-1;
         let sec = 60;
         console.log('cont down executed')
@@ -78,18 +99,20 @@ export default class Exam extends Component {
 
     render() {
         return (
-            <div>
-                <input value={this.state.code} onChange={this.handlecode}></input>
-                <button onClick={this.geturl} >Enter code</button>
+            <div className='center mt-md-5'>
+                <input placeholder='exam code' className='w-75' value={this.state.code} onChange={this.handlecode}></input>
+                <button className='btn btn-dark btn-outline-info btn-sm ml-2' onClick={this.geturl} >Submit code</button>
 
-                <div  id="exam">
-                    <h1>Click start to start the exam</h1>
-                    <div><button hidden='true' onClick={this.starttimer} id='start'>Start</button></div>
-                    <div color='red'>once you click start the timer will star. do not refresh . Do click the submit button before time end</div>
+                <div className='mt-lg-3'  id="exam">
+                    <h3 className='text-dark'>Click start to start the exam</h3>
+                    <div><button className='btn btn-primary border-danger' disabled={this.btn_dis} onClick={this.starttimer} id='start'>Start</button></div>
+                    <div className='text-danger red'>once you click start, the timer will start. Do not refresh . Do click the submit button before time end</div>
                     <div id='demo'></div>
-                    <div><span id='min'></span> : <span id='sec'></span></div>
-                    <iframe hidden='true' id='form' title='googleform' src={this.state.url}
+                    <div className='font-weight-bolder'><span className='font-weight-bolder text-success' id='min'></span> min : <span className='font-weight-bolder text-sucess' id='sec'></span> sec</div>
+                    <iframe className='w-100' hidden='true' id='form' title='googleform' src={this.url1}
                         width="640" height="1517" frameBorder="0" marginHeight="0" marginWidth="0">Loading…</iframe>
+
+                        {this.exam_over}
                 </div>
                 
             </div>

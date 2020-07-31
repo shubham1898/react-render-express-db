@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import MainPage from './components/mainpage'
 import Exam from './components/exam'
@@ -10,7 +11,7 @@ function App() {
   return (
     
       <Router>
-        <div className="App">
+        <div className="container">
           <Navbar />
         <Route path="/mainPage"  component={MainPage}  />
         <Route path="/exam"  component={Exam}  />

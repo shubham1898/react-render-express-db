@@ -37,16 +37,20 @@ export default class Questionsetup extends Component {
     }
        axios.post('/CreateForm/add',user).then(res=>{
            console.log(res.data)
+          alert('Data sucessfully added !! please distribute the unique exam code to concerned exam takes')
        })
     }
 
     render() {
         return (
-            <div>
-                <input required value={this.state.code} onChange={this.handlecode} type="text" placeholder='code'></input>
-                <input required value={this.state.url} onChange={this.handleurl} type="text" placeholder='url'></input>
-                <input value={this.state.time} onChange={this.handletime} type='Number' placeholder='time' ></input>
-                <button onClick={this.handlesubmit} type="submit">Submit</button>
+            <div className='form-group center mt-5'>
+                <div className='w-100'><label className='col-form-label font-weight-bolder mr-1 w-100'>Unique Exam Code
+                <input className='input ml-4 w-50 ' required value={this.state.code} onChange={this.handlecode} type="text" placeholder='code'></input></label></div>
+                <div className='w-100'><label className='font-weight-bolder mr-1 w-100'>Google Form Url
+                <input className='input ml-5 w-50' required value={this.state.url} onChange={this.handleurl} type="text" placeholder='url'></input></label></div>
+                <div className='w-100'><label className='font-weight-bolder mr-1 w-100'>Exam Time Limit
+                <input className='input ml-5 w-25 ' value={this.state.time} onChange={this.handletime} type='Number' placeholder='time' ></input></label></div>
+                <button className='btn btn-info mt-5' onClick={this.handlesubmit} type="submit">Submit</button>
             </div>
         )
     }
