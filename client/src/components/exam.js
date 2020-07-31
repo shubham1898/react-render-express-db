@@ -18,6 +18,7 @@ export default class Exam extends Component {
         const code = {
             code: this.state.code
         }
+        document.querySelector('#start').hidden=false
         const res = await axios.post('/CreateForm/exam', code);
         this.setState({
             url: res.data.url,
@@ -58,7 +59,7 @@ export default class Exam extends Component {
     // }
 
     setCountDown = async () => {
-        let min = this.state.time;
+        let min = this.state.time-1;
         let sec = 60;
         console.log('cont down executed')
         var clear = setInterval(function () {
@@ -82,8 +83,8 @@ export default class Exam extends Component {
                 <button onClick={this.geturl} >Enter code</button>
 
                 <div  id="exam">
-                    <h1>This is first google embed</h1>
-                    <div><button onClick={this.starttimer} id='start'>Start</button></div>
+                    <h1>Click start to start the exam</h1>
+                    <div><button hidden='true' onClick={this.starttimer} id='start'>Start</button></div>
                     <div color='red'>once you click start the timer will star. do not refresh . Do click the submit button before time end</div>
                     <div id='demo'></div>
                     <div><span id='min'></span> : <span id='sec'></span></div>
