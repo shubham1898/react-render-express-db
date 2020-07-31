@@ -13,7 +13,7 @@ constructor(){
     this.getdata=this.getdata.bind(this)
 }
 componentDidMount(){
-    axios.get('http://localhost:5000/CreateForm/').then(response=>{
+    axios.get('/CreateForm').then(response=>{
         this.setState({
        data:response.data
         })
@@ -23,7 +23,7 @@ componentDidMount(){
 }
 
 getdata(){
-    axios('http://localhost:5000/CreateForm/').then(response=>{
+    axios('/CreateForm').then(response=>{
     this.setState({
     data:response.data
     });

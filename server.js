@@ -1,5 +1,6 @@
 const express=require('express')
 const cors = require('cors');
+const path=require('path')
 
 const mongoose=require('mongoose')
 
@@ -29,6 +30,10 @@ const CreateFormRouter=require('./routes/createform')
 app.use('/CreateForm', CreateFormRouter)
 // app.use('/exam',examRouter)
 
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  });
 
 app.listen(port,()=>{
     console.log('server Live')
