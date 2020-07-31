@@ -22,6 +22,14 @@ router.route('/add').post(async (req,res)=>{
    res.json('form added')
     
 })
+router.route('/exam').post(async(req,res)=>{
+    const code=req.body.code;
+    Form.findOne({code}).then(body=>{
+        res.json(body)
+    }).catch(e=>{
+   console.log(e)
+    })
+})
 
 
 module.exports=router;
