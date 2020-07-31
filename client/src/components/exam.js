@@ -47,7 +47,7 @@ export default class Exam extends Component {
             this.setTime(this.state.time*60000)
             this.setCountDown()
         document.querySelector('#start').hidden=true
-        document.querySelector('#from').hidden=false
+        document.querySelector('#form').hidden=false
 
     }
 
