@@ -70,7 +70,7 @@ export default class Exam extends Component {
                 min--;
             }
             sec--;
-            if (min === 0) {
+            if (min === -1) {
                 clearInterval(clear)
             }
         }, 1000)
