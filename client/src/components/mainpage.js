@@ -35,7 +35,8 @@ getdata=()=>{
 
     render() {
         return (
-         <div>   
+         <div>  
+             <h2 className="mt-3">Sample exam code</h2> 
               {/* {this.getdata} */}
         {this.state.data.map(val=>(
             <div key={val._id}>{val.code}</div>
