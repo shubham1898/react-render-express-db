@@ -19,7 +19,9 @@ export default class Exam extends Component {
             endyear: null,
             endhour: null,
             endmin: null,
-            isbytimer:true
+            isbytimer:true,
+            startDate:new Date(),
+            endDate:new Date()
         }
          this.exam_over=<div></div>
          this.form_dis=false
@@ -30,6 +32,7 @@ export default class Exam extends Component {
          this.form_hid=true
          this.start_hid=false
          this.timer=true
+         this.myVar={}
     }
     componentDidMount(){
         
@@ -55,7 +58,7 @@ export default class Exam extends Component {
         }else {
             this.exam_hid=false
             this.clock_hid=false
-            let myVar = setInterval(function(){
+            this.myVar = setInterval(function(){
                var d = new Date();
             document.getElementById("currentclock").innerHTML = d.toLocaleTimeString();
              }, 1000);
@@ -72,6 +75,11 @@ export default class Exam extends Component {
                 endmin: res.data.endmin,
                 isbytimer:false
             })
+            this.setState({
+                startDate:new Date(this.state.year,this.state.month-1,this.state.day,this.state.hour,this.state.min),
+                endDate:new Date(this.state.endyear,this.state.endmonth-1,this.state.endday,this.state.endhour,this.state.endmin)
+            })
+
         }
     }
 
@@ -85,18 +93,15 @@ export default class Exam extends Component {
     
     //clock.js
     checkclock=async ()=>{
-         var t=new Date();
-             if(t.getFullYear()>=this.state.year){
-             if(t.getMonth()>=this.state.month){
-             if(t.getDay()>=this.state.day){
-               if(t.getHours()>=this.state.hour){
-                 if(t.getMinutes()>=this.state.min)
-                 {
-                      document.getElementById("form").hidden=false
-                 }
-             } else alert("wait");     
-         }}}else alert("wait");
-    // myVar()
+         let current=new Date();
+         alert('method executed')
+         if(current>this.state.startDate&&current<this.state.endDate){
+             alert('yes checked')
+            document.getElementById("form").hidden=false
+
+            this.setTime(this.state.endDate-current);
+         } else if(current<this.state.startDate){ alert(`Please Wait ,Exam starts at ${this.state.startDate}  ,Time left to begin : ${(this.state.startDate-current)/60000} Minutes`)}
+         else if(current>this.state.endDate){ alert(`Sorry you missed the exam ,Exam over at ${this.state.endDate}`)}
     }
 
     //timer.js
@@ -105,6 +110,8 @@ export default class Exam extends Component {
         setTimeout(() => {
             // window.location.reload()
             this.form_hid=true;
+            document.getElementById("form").hidden=true
+
             this.exam_over=<h3 className='text-success text-center'>Exam Over</h3>
 
             if ( window.history.replaceState ) {

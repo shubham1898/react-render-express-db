@@ -35,7 +35,8 @@ export default class Questionsetup extends Component {
     }
     handletime = (event) => {
         this.setState({
-            'time': Number(event.target.value)
+            'time': Number(event.target.value),
+            'isbytimer':true
         })
     }
 
