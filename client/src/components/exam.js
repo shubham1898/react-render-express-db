@@ -164,12 +164,12 @@ export default class Exam extends Component {
                     <div hidden={this.timer} id="timer">
                     <h3 id='start_des' className='text-dark '>Click start to begin the exam</h3>
                     <div ><button  className='btn btn-primary border-danger' hidden={this.start_hid}  onClick={this.starttimer} id='start'>Start</button></div>
-                    <div className='text-danger red'>once you click start, the timer will start. Do not refresh . Do click the submit button before time end</div>
+                    <div className='text-danger red'>Once you click start, the timer will start. Do not refresh . Do click the submit button before time end</div>
                     <div className='font-weight-bolder'><span className='font-weight-bolder text-success' id='min'></span> min : <span className='font-weight-bolder text-sucess' id='sec'></span> sec</div>
                     </div>
 
                     <div hidden={this.clock_hid} id="clock">
-                    <div className='text-danger red'>once you click start, Do not refresh . Do click the submit button before time end</div>
+                    <div className='text-danger red'>Once you click start, Do not refresh . Do click the submit button before time end</div>
                     <div>current time : <span id='currentclock'></span> <div className="d-flex flex-fill"><span className="text-success mr-5">Exam starts at : {this.state.day}/{this.state.month}/{this.state.year} - {this.state.hour} : {this.state.min}</span>   <span className="text-warning flex-end">Exam End at : {this.state.endday}/{this.state.endmonth}/{this.state.endyear} - {this.state.endhour} : {this.state.endmin} </span></div></div>
                     <div><button className='btn btn-primary border-danger' disabled={this.btn_dis} onClick={this.checkclock} id='startclock'>Start</button></div>
 
